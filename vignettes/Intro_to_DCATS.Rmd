@@ -1,0 +1,159 @@
+---
+title: "Differential Composition Analysis with DCATS"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Differential Composition Analysis with DCATS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`DCATS` contains methods to detect the differential composition
+abundances between multiple conditions in singel-cell experiments.
+
+The latest version of the `DCATS` pacakge is 0.99.0. 
+
+```{r setup, warning=FALSE}
+library(DCATS)
+```
+
+## Installation and loading
+
+### From R
+
+The **latest** `DCATS` package can be conveniently installed using the
+[`devtools`](https://www.rstudio.com/products/rpackages/devtools/)
+package thus:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("huangyh09/DCATS", build_vignettes = TRUE)
+```
+
+The main function of `DCATS` is the function `dcats_GLM`. This function requires three input components. The first one is a m $\times$ n count matrix where m denotes we have m samples, n denotes we have n cell types. The second component is a matrix indicating the factors we want to test on. Different factors classify samples into different conditions. The third one is a similarity matrix $\{m_{ij}\}$ indicating the misclassification rate between the $i$ cell type and the $j$ cell type. 
+
+**Noted**: The misclassfication correction process in `dcats_GLM`. If the similarity matrix is absent, the differential abundances analysis will be done based on the observed cell count number.
+
+## Simulate Data
+
+Here, we used a built-in simulator in `DCATS` to simulate the data for following analysis. We simulate count data for four samples coming from the first condition with total cell counts 100, 800, 1300, and 600. We simulate another three samples coming from the second condition with total cell counts 250, 700, 1100.
+
+In this simulator function, a proportion of different cell types is simulate following [a dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution) decided by $\{p_i\} \times c$ where $\{p_i\}$ is the true proportion vector and $c$ is a concentration parameter indicating how far way the simulated proportion can be. The larger the $c$, the higher probability to simulate a proportion vector close to the true proportion. Then the cell counts are generated from the multinomial distribution with self-defined total cell counts and simulated proportions.
+
+```{r}
+set.seed(6171)
+K <- 3
+totals1 = c(100, 800, 1300, 600)
+totals2 = c(250, 700, 1100)
+diri_s1 = rep(1, K) * 20
+diri_s2 = rep(1, K) * 20
+simil_mat = create_simMat(K, confuse_rate=0.2)
+sim_dat <- DCATS::simulator_base(totals1, totals2, diri_s1, diri_s2, simil_mat)
+```
+
+The output of `simulator_base` is the cell counts matrices of two conditions.
+
+```{r}
+print(sim_dat$numb_cond1)
+print(sim_dat$numb_cond2)
+```
+
+## Esitimate the Simlarity Matrix
+
+`DCATS` provides three methods to get the similarity matrix which indicates the misclassification rate between different cell types. Currently, `DCATS` provides three ways to estimate the similarity matrix.
+
+The first one describes an unbiased misclassification across all the cell types. It means that one cell from a cell type have equal chance to be assigned to rest other cell types. When the numbers of biological replicates are the same in two conditions and are relatively large, other unbiased random error will contribute more to the difference between the observed proportions and the true proportions. In this case, using this uniform confusion matrix is a better choice.
+
+We use the function `create_simMat` to create a similarity matrix describe above. We need to specify the number of cell types $K$ and the confuse rate which indicates the proportion of cells from one cell type being assigned to other cell types.
+
+```{r}
+simil_mat = create_simMat(K = 3, confuse_rate = 0.2)
+print(simil_mat)
+```
+
+The second kind of confusion matrix is estimated from the knn matrix provided by [Seurat](https://satijalab.org/seurat/). It calculates the proportion of neighborhoods that are regarded as other cell types. In this case, DCATS corrects cell proportions mainly based on the information of similarity between different cell types and variety within each cell types.
+
+The input of this function should be a 'Graph' class from [SeuratObject](https://cran.r-project.org/web/packages/SeuratObject/index.html) and a factor vector containing the cell type information of each cell. We can estimate the knn similarity matrix for the `simulation` dataset included in the `DCATS` package.
+
+```{r}
+data(simulation)
+print(simulation$knnGraphs[1:10, 1:10])
+head(simulation$labels, 10)
+## estimate the knn matrix
+knn_mat = knn_simMat(simulation$knnGraphs, simulation$labels)
+print(knn_mat)
+```
+
+The third way to estimate a confusion matrix is to use a support vector machine classifier. The input for estimating the confusion matrix will be a data frame containing a set of variables that the user believe will influence the result of the clustering process as well as the cell type labels for each cell. We then use 5-fold cross validation and support vector machine as the classifier to predict cell type labels. By comparing given labels and predicted labels, we can get a confusion matrix.
+
+**Noted**: Two packages `tidyverse` and `tidymodels` should be attached.
+
+```{r}
+data(Kang2017)
+head(Kang2017$svmDF)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(tidymodels)
+## estimate the svm matrix
+svm_mat = svm_simMat(Kang2017$svmDF)
+print(svm_mat)
+```
+
+```{r, echo=FALSE}
+print(Kang2017$svm_mat)
+```
+
+## Differential Abundance Anlysis
+
+Here we used the simulated result to demonstrate the usage of `dcats_GLM`. We combine two cell counts matrices to create the count matrix, and create a corresponding data frame indicating the condition of those samples. `dcats_GLM` can give results based on the count matrix and design matrix.
+
+**Noted** Even though we call it design matrix, we allow it to be both `matrix` and `data.frame`.
+
+```{r, warning=FALSE}
+sim_count = rbind(sim_dat$numb_cond1, sim_dat$numb_cond2)
+print(sim_count)
+sim_design = data.frame(condition = c("g1", "g1", "g1", "g1", "g2", "g2", "g2"))
+print(sim_design)
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat)
+```
+
+The `ceoffs` indicates the estimated values of coefficients, the `coeffs_err` indicates the standard errors of coefficients, the `LRT_pvals` indicates the p-values calculated from the likelihood ratio test, and the `fdr` indicates the adjusted p-values given by [Benjamini & Hochberg method](https://www.jstor.org/stable/2346101?seq=1#metadata_info_tab_contents).
+
+**Noted**: You might sometime receive a warning like `Possible convergence problem. Optimization process code: 10 (see ?optim).` It is caused by the low number of replicates and won't influence the final results.
+
+
+## Other Models for Testing
+
+When doing the differential abundance analysis in `DCATS`, we used generalized linear model assuming the cell counts follow beta-binomial distribution. `DCATS` provides p-values for each cluster considering each factor in the design matrix. The default model is comparing a model with only the tested factor and the null model. In this case, factors are tested independently.
+
+We can also choose to compare the full model and a model without the tested factor. In this case, factors are tested when controlling the rest factors. 
+
+```{r, warning=FALSE}
+## add another factor for testing
+set.seed(123)
+sim_design = data.frame(condition = c("g1", "g1", "g1", "g1", "g2", "g2", "g2"), 
+                        gender = sample(c("Female", "Male"), 7, replace = TRUE))
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, base_model='FULL')
+```
+
+When fitting the beta binomial model, we have a parameter $\phi$ to describe the over-dispersion of data. The default setting of `DCATS` is to fit $\phi$ for each cell type. This might leads to over-fitting. Here we can use the `getPhi` function to estimate a global $\phi$ for all cell types and set `fixphi = TRUE` to apply this global $\phi$ to all cell types.
+
+In this case, `coeffs_err` is not available.
+
+```{r, warning=FALSE}
+sim_design = data.frame(condition = c("g1", "g1", "g1", "g1", "g2", "g2", "g2"))
+phi = DCATS::getPhi(sim_count, sim_design)
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, fix_phi = phi)
+```
+
+The `LRT_pvals` can be used to define whether one cell type shows differential proportion among different conditions by setting threshold as 0.05 or 0.01.
+
