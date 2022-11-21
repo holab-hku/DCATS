@@ -7,7 +7,7 @@ DCATS.Rproj
 .rprofile
 .rproj
 .rproj.user
-.rhistory
+.Rhistory
 .rapp.history
 .o
 .sl
@@ -20,7 +20,7 @@ DCATS.Rproj
 unsrturl.bst
 .log
 .aux
-.backups
+.backupsq
 .cproject
 .directory
 .dropbox
