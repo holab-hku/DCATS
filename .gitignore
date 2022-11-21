@@ -1,5 +1,7 @@
 .Rproj.user
 .Rhistory
+*.rproj
+*.rproj
 .RData
 .Ruserdata
 DCATS.Rproj
@@ -7,7 +9,6 @@ DCATS.Rproj
 .rprofile
 .rproj
 .rproj.user
-.Rhistory
 .rapp.history
 .o
 .sl
