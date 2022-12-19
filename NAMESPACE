@@ -2,6 +2,7 @@
 
 export(create_simMat)
 export(dcats_GLM)
+export(detect_reference)
 export(getPhi)
 export(knn_simMat)
 export(multinom_EM)

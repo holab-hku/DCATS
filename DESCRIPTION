@@ -25,7 +25,7 @@ Suggests:
     tidyverse,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 biocViews: SingleCell
 Encoding: UTF-8
 LazyData: true

@@ -157,3 +157,28 @@ dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, fix_phi = phi)
 
 The `LRT_pvals` can be used to define whether one cell type shows differential proportion among different conditions by setting threshold as 0.05 or 0.01.
 
+## Use reference cell types as normalization term
+
+DCATS also supports the use of known unchanged cell types as reference cell types. We recommend using 1) more than one cell type; 2) more than 20% of total cells as the reference group. Here, we named three simulated cell types as A, B, C, and use the cell type A, B as the reference cell types. 
+
+```{r}
+colnames(sim_count) = c("A", "B", "C")
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = c("A", "B"))
+```
+
+Even though it is not recommended, DCATS allows the use of one cell type as the reference cell type. Especially when we are interested in the ratio relationship between two cell types (for eaxmple A and B).
+
+```{r}
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = c("A"))
+```
+
+When we have no idea which cell types can be used as reference cell types, DCATS supports detection of reference cell types automatically using the function `detect_reference`. This function returns a data frame with ordered cell types and their p-value. Cell types are ordered by their p-values. The order indicating how they are recommended to be selected as reference cell types. We recommend to select top cell types with p-values larger than 0.2.
+
+Nonetheless, this kind of tasks is challenging and we suggest users perform the reference cell selection with caution.
+
+```{r}
+reference_cell = detect_reference(sim_count, sim_design, similarity_mat = simil_mat)
+print(reference_cell)
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell$celltype[1:2])
+```
+
