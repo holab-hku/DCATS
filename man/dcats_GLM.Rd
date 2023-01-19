@@ -36,8 +36,9 @@ otherwise pseudo_count will be: 0.01 * rowMeans for each condition}
 \item{fix_phi}{A numeric used to provided a fixed phi value for the GLM 
 for all cell types}
 
-\item{reference}{A string value indicating which cell type is used as 
-reference for normalization. `NULL` indicates using total count for normalization.}
+\item{reference}{A vector of characters indicating which cell types are used 
+as reference for normalization. `NULL` indicates using total count for 
+normalization.}
 }
 \value{
 a list of significance p values for each cluster
