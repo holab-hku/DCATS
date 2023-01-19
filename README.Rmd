@@ -66,13 +66,15 @@ a project, and build it by install and restart.
 
 ## Getting started
 
-The best place to start are the vignettes. From inside an R session,
-load `DCATS` and then browse the vignettes:
+The best place to start are the vignettes. Inside an R session,
+load `DCATS` and then browse the vignette about the usage guidance of `DCATS`:
 
 ``` r
 library(DCATS)
 browseVignettes("DCATS")
 ```
+
+The tutorial demonstrating how to use DCATS after using [`Seurat`](https://satijalab.org/seurat/index.html) pipeline to process data can be found in [`Integrate DCATS with Seurat pipeline`](https://htmlpreview.github.io/?https://github.com/linxy29/DCATS_anlysis/blob/master/vignette/Integrate_with_seurat.html).
 
 ### Example
 

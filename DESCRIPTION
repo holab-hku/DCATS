@@ -21,7 +21,6 @@ Suggests:
     knitr,
     Seurat,
     SeuratObject,
-    SeuratData,
     tidyverse,
     rmarkdown
 VignetteBuilder: knitr
