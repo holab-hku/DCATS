@@ -28,4 +28,8 @@ variables used to generate the similarity matrix
 from intestinal epithelial single cell RNA sequencing data with 
 three condition
 }
+\examples{
+library(DCATS)
+data(Haber2017)
+}
 \keyword{datasets}

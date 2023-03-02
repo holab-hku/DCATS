@@ -20,6 +20,20 @@
 #' 
 #'   
 #' @export
+#' 
+#' @examples
+#' K <- 3
+#' totals1 = c(100, 800, 1300, 600)
+#' totals2 = c(250, 700, 1100)
+#' diri_s1 = rep(1, K) * 20
+#' diri_s2 = rep(1, K) * 20
+#' simil_mat = DCATS::create_simMat(K, confuse_rate=0.2)
+#' sim_dat <- DCATS::simulator_base(totals1, totals2, diri_s1, diri_s2, simil_mat)
+#' sim_count = rbind(sim_dat$numb_cond1, sim_dat$numb_cond2)
+#' sim_design = data.frame(condition = c("g1", "g1", "g1", "g1", "g2", "g2", "g2"), 
+#' gender = sample(c("Female", "Male"), 7, replace = TRUE))
+#' ## Using 1 factor vs NULL factor testing
+#' detect_reference(sim_count, sim_design)
 
 detect_reference = function(count_mat, design_mat, similarity_mat = NULL, fix_phi = NULL){
   res = dcats_GLM(count_mat, design_mat, similarity_mat, fix_phi = fix_phi)

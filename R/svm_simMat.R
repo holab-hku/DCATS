@@ -12,6 +12,9 @@
 #' column name `clusterRes`.
 #' 
 #' @export
+#' @examples
+#' data(Kang2017)
+#' svm_mat = svm_simMat(Kang2017$svmDF)
 #'
 #' @return a similarity matrix estimated by 5-fold cross validation support 
 #' vector machine.

@@ -22,3 +22,8 @@ information used to cluster cells. It is estimated by the misclassification
 rate from cluster i to j comparing the original labels with the labels predicted 
 by support vector machine with 5-fold cross validation.
 }
+\examples{
+data(Kang2017)
+svm_mat = svm_simMat(Kang2017$svmDF)
+
+}

@@ -16,6 +16,9 @@
 #'   \item{source}{the source of this dataset}
 #' }
 #' @source \url{https://www.nature.com/articles/nature24489}
+#' @examples 
+#' library(DCATS)
+#' data(Haber2017)
 "Haber2017"
 
 #' Count matrices of 8 pooled lupus patient samples within two conditions
