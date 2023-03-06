@@ -12,7 +12,6 @@ A list with 7 items:
   \item{count_Hpoly10}{the count matrix for ten days after H.polygyrus infection}
   \item{count_Salma}{the count matrix for two days after Salmonella infection}
   \item{svm_mat}{the similarity matrix}
-  \item{svmDF}{the data frame used to calculate the similarity matrix}
   \item{source}{the source of this dataset}
 }
 }
