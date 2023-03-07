@@ -172,13 +172,13 @@ Even though it is not recommended, DCATS allows the use of one cell type as the 
 dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = c("A"))
 ```
 
-When we have no idea which cell types can be used as reference cell types, DCATS supports detection of reference cell types automatically using the function `detect_reference`. This function returns a data frame with ordered cell types and their p-value. Cell types are ordered by their p-values. The order indicating how they are recommended to be selected as reference cell types. We recommend to select top cell types with p-values larger than 0.2.
+When we have no idea which cell types can be used as reference cell types, DCATS supports detection of reference cell types automatically using the function `detect_reference`. This function returns a vector with ordered cell types and a meesage indicating how many cell types should be selected as the reference group. Cell types are ordered by an estimation of their proportion difference. The order indicating how they are recommended to be selected as reference cell types. We recommend to select top cell types.
 
 Nonetheless, this kind of tasks is challenging and we suggest users perform the reference cell selection with caution.
 
 ```{r}
 reference_cell = detect_reference(sim_count, sim_design, similarity_mat = simil_mat)
 print(reference_cell)
-dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell$celltype[1:2])
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell[1:2])
 ```
 
