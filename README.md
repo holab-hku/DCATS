@@ -9,7 +9,7 @@
 This R package contains methods to detect the differential composition
 abundances between multiple conditions in singel-cell experiments.
 
-The **latest** version of the `DCATS` package is 0.99.0.
+The **latest** version of the `DCATS` package is 0.99.1.
 
 ## Installation
 

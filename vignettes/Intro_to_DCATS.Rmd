@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 `DCATS` contains methods to detect the differential composition
 abundances between multiple conditions in singel-cell experiments.
 
-The latest version of the `DCATS` pacakge is 0.99.0. 
+The latest version of the `DCATS` pacakge is 0.99.1. 
 
 ```{r setup, warning=FALSE}
 library(DCATS)
