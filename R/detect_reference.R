@@ -48,7 +48,7 @@ detect_reference = function(count_mat, design_mat, similarity_mat = NULL, fix_ph
   typeSum = colSums(count_mat)
   for (celltype_num in 2:nrow(resDF)) {
     if (sum(typeSum[resDF$celltype[1:celltype_num]])/sum(typeSum) > 0.25) {
-      print(paste0("Please use at least ", as.character(celltype_num), " cell types as the reference group."))
+      message(paste0("Please use at least ", as.character(celltype_num), " cell types as the reference group."))
       return(resDF$celltype)
     }
   }

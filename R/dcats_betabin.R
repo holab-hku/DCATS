@@ -97,7 +97,7 @@ dcats_betabin <- function(counts1, counts2, similarity_mat=NULL, n_samples=50,
     # adding pseudo counts
     if (is.null(pseudo_count)) {
         if (any(colMeans(counts1) == 0) || any(colMeans(counts2) == 0) ) {
-            print(paste("Empty cell type exists in at least one conidtion;",
+            warning(paste("Empty cell type exists in at least one conidtion;",
                         "adding replicate & condition specific pseudo count:"))
             counts1_use <- counts1_use + 1
             counts2_use <- counts2_use + 1
@@ -124,8 +124,8 @@ dcats_betabin <- function(counts1, counts2, similarity_mat=NULL, n_samples=50,
             ## betabin GLM
             fm1 <- aod::betabin(cbind(n1, n2) ~ label, ~ 1, data = df)
             if (any(is.na(fm1@varparam))) {
-                print(fm1)
-                print(df)
+                #print(fm1)
+                #print(df)
             } else {
                 coeffs_err[ir, i] <-fm1@varparam[2, 2]
                 }

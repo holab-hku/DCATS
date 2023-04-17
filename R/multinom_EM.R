@@ -35,7 +35,7 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
     logLik_old <- logLik_new <- log(mu %*% simMM) %*% X
 
     if (verbose) {
-        print(paste("Iteration 0 logLik:", round(logLik_new, 3)))
+        message(paste("Iteration 0 logLik:", round(logLik_new, 3)))
     }
 
     for (it in seq_len(max_iter)) {
@@ -65,7 +65,7 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
             logLik_old <- logLik_new
         }
         if (verbose) {
-            print(paste("Iteration", it, "logLik:", round(logLik_new, 3)))
+            message(paste("Iteration", it, "logLik:", round(logLik_new, 3)))
         }
 
     }
