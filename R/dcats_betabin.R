@@ -19,7 +19,7 @@
 #'
 #' @return a vector of significance p values for each cluster
 #'
-#' @import matrixStats
+#' @importFrom matrixStats colSds
 #' 
 #'
 #' @examples

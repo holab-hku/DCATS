@@ -19,7 +19,7 @@
 #'   each cluster in both conditions.
 #'
 #' @export
-#' @import MCMCpack
+#' @importFrom MCMCpack rdirichlet
 #'
 #'
 #' @examples

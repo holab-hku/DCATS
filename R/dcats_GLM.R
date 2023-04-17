@@ -24,7 +24,7 @@
 #' @return a list of significance p values for each cluster
 #'
 #' @export
-#' @import matrixStats
+#' @importFrom matrixStats colSds
 #' @import stats
 #'
 #' @examples
