@@ -40,8 +40,6 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
 
     for (it in seq_len(max_iter)) {
         ## E step: expectation of count from each component
-        # Z = (simMM * mu)
-        # Z = t(t(Z) / colSums(Z))
 
         for (i in seq(K)) {
             for (j in seq(K)){
@@ -50,7 +48,6 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
         }
 
         ## M step: maximizing likelihood
-        # mu = c(X %*% Z) # this is wrong
 
         ## v2
         mu = c(Z %*% X)
@@ -58,7 +55,6 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
 
         ## Check convergence
         logLik_new <- log(mu %*% simMM) %*% X
-        # sum(X * log(mu %*% t(simMM)))
         if (it > min_iter && logLik_new - logLik_old < logLik_threshold) {
             break
         } else {
