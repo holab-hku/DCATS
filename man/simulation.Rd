@@ -21,6 +21,13 @@ simulation
 \description{
 A data containing the count matrices, the similarity matrix and other 
 variables used to generate the similarity matrix 
-from a simulated single cell RNA sequencing data with two conditions
+from a simulated single cell RNA sequencing data with two conditions. 
+Dirichlet distribution was used to generate a proportion vector for cell 
+types based on the defined true proportions. Multinomial distribution was 
+used to generate simulated cell numbers. Cells were selected from cell pools
+based on cell numbers and gene expression matrices were processed by Seurat.
+The count matrix were calculated by the clustering results, and the 
+similarity matrix was calculated using knn graph. The labels are the groud
+true annotation of each cell.
 }
 \keyword{datasets}

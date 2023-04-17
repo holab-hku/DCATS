@@ -3,7 +3,7 @@
 \docType{data}
 \name{Ren2021}
 \alias{Ren2021}
-\title{Count matrix and metadata of a large COVID-19 scRNA-seq data cohort}
+\title{Count matrix and metadata of a large COVID-19 scRNA-seq data cohort.}
 \format{
 A list with 7 items:
 \describe{
@@ -19,6 +19,9 @@ A list with 7 items:
 Ren2021
 }
 \description{
-A data containing the count matrix, metadata from a large COVID-19 cohort
+A data containing the count matrix, metadata from a large COVID-19 cohort.
+Count matrices are 
+calculated based on the number of cells in each cell type. The information 
+in the design matrix is collected in the original paper.
 }
 \keyword{datasets}

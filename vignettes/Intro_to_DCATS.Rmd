@@ -1,12 +1,17 @@
 ---
 title: "Differential Composition Analysis with DCATS"
+author: "Xinyi LIN"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Differential Composition Analysis with DCATS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r setup, include=FALSE}
+library(BiocStyle)
+```
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -15,31 +20,32 @@ knitr::opts_chunk$set(
 )
 ```
 
-`DCATS` contains methods to detect the differential composition
-abundances between multiple conditions in singel-cell experiments.
+# Introduction
 
-The latest version of the `DCATS` pacakge is 0.99.1. 
+This vignette provides an introduction to the `DCATS` package, which contains 
+methods to detect the differential composition abundances between multiple 
+conditions in singel-cell experiments.
 
-```{r setup, warning=FALSE}
+# Installation
+To install `DCATS`, first make sure that you have the devtools package installed:
+
+```r
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("BiocManager")
+```
+
+Then, install `DCATS` using the following command:
+
+```r
+BiocManager::install("DCTAS")
+```
+
+# Usage
+To use DCATS, start by loading the package:
+
+```{r, warning=FALSE}
 library(DCATS)
 ```
-
-## Installation and loading
-
-### From R
-
-The **latest** `DCATS` package can be conveniently installed using the
-[`devtools`](https://www.rstudio.com/products/rpackages/devtools/)
-package thus:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("huangyh09/DCATS", build_vignettes = TRUE)
-```
-
-The main function of `DCATS` is the function `dcats_GLM`. This function requires three input components. The first one is a m $\times$ n count matrix where m denotes we have m samples, n denotes we have n cell types. The second component is a matrix indicating the factors we want to test on. Different factors classify samples into different conditions. The third one is a similarity matrix $\{m_{ij}\}$ indicating the misclassification rate between the $i$ cell type and the $j$ cell type. 
-
-**Noted**: The misclassfication correction process in `dcats_GLM`. If the similarity matrix is absent, the differential abundances analysis will be done based on the observed cell count number.
 
 ## Simulate Data
 
@@ -180,5 +186,9 @@ Nonetheless, this kind of tasks is challenging and we suggest users perform the 
 reference_cell = detect_reference(sim_count, sim_design, similarity_mat = simil_mat)
 print(reference_cell)
 dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell[1:2])
+```
+
+```{r}
+sessionInfo()
 ```
 

@@ -23,9 +23,11 @@ Haber2017
 }
 \description{
 A data containing the count matrices, the similarity matrix and other 
-variables used to generate the similarity matrix 
-from intestinal epithelial single cell RNA sequencing data with 
-three condition
+variables used to generate the similarity matrix from intestinal epithelial 
+single cell RNA sequencing data with three condition. Count matrices are 
+calculated based on the number of cells in each cell type. The similarity 
+matrix is calculated by support vector machine classifiers using 5-fold 
+cross validation. Top 30 PCs are used as predictors.
 }
 \examples{
 library(DCATS)

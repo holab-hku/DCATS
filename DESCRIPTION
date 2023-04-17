@@ -25,7 +25,8 @@ Suggests:
     Seurat,
     SeuratObject,
     tidyverse,
-    rmarkdown
+    rmarkdown,
+    BiocStyle
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3
 biocViews: SingleCell
