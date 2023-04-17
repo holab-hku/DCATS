@@ -23,13 +23,13 @@ svm_simMat = function(dataframe){
   dataframe$clusterRes = as.factor(dataframe$clusterRes)
   row_num = nrow(dataframe)
   pred = rep(NA, row_num)
-  idx1 = sample(1:row_num, round(row_num/5))
-  idx2 = sample((1:row_num)[-idx1], round(row_num/5))
-  idx3 = sample((1:row_num)[-c(idx1, idx2)], round(row_num/5))
-  idx4 = sample((1:row_num)[-c(idx1, idx2, idx3)], round(row_num/5))
-  idx5 = (1:row_num)[-c(idx1, idx2, idx3, idx4)]
+  idx1 = sample(seq(1,row_num), round(row_num/5))
+  idx2 = sample(seq(1,row_num)[-idx1], round(row_num/5))
+  idx3 = sample(seq(1,row_num)[-c(idx1, idx2)], round(row_num/5))
+  idx4 = sample(seq(1,row_num)[-c(idx1, idx2, idx3)], round(row_num/5))
+  idx5 = seq(1,row_num)[-c(idx1, idx2, idx3, idx4)]
   idxV = list(idx1, idx2, idx3, idx4, idx5)
-  for (i in 1:5){
+  for (i in seq(1,5)){
     svmfit = e1071::svm(clusterRes ~ ., data = dataframe[-idxV[[i]],], kernel = "radial")
     pred[idxV[[i]]] = as.character(aod::predict(svmfit, subset(dataframe, select = -clusterRes)[idxV[[i]],]))
   }

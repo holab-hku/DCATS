@@ -32,7 +32,7 @@ getPhi = function(count_mat, design_mat){
   n1 = matrix(count_mat, ncol = 1)
   design_use = do.call("rbind", replicate(K, design_mat, simplify = FALSE))
   celltype_idx = matrix(0, S*K, K)
-  for (type in 1:K) {
+  for (type in seq(1,K)) {
     celltype_idx[(1:S)+S*(type-1),type] = 1
   }
   df_use = data.frame(total, n1, design_use, celltype_idx[,-1])
