@@ -1,7 +1,7 @@
 Package: DCATS
 Type: Package
 Title: Differential Composition Analysis Transformed by a Similarity matrix
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: 
     person("Xinyi", "Lin", , "linxy29@connect.hku.hk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7780-2461"))
