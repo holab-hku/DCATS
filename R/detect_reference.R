@@ -35,17 +35,17 @@
 #' ## Using 1 factor vs NULL factor testing
 #' detect_reference(sim_count, sim_design)
 
-detect_reference = function(count_mat, design_mat, similarity_mat = NULL, fix_phi = NULL){
-  res = dcats_GLM(count_mat, design_mat, similarity_mat, fix_phi = fix_phi)
-  resDF = data.frame(celltype = rownames(res$LRT_pval), pval = as.vector(apply(res$LRT_pvals, 1, min)))
-  resDF = resDF[resDF$pval > 0.1,]
-  resDF = resDF[order(-resDF$pval),]
+detect_reference <- function(count_mat, design_mat, similarity_mat = NULL, fix_phi = NULL){
+  res <- dcats_GLM(count_mat, design_mat, similarity_mat, fix_phi = fix_phi)
+  resDF <- data.frame(celltype = rownames(res$LRT_pval), pval = as.vector(apply(res$LRT_pvals, 1, min)))
+  resDF <- resDF[resDF$pval > 0.1,]
+  resDF <- resDF[order(-resDF$pval),]
   if (nrow(resDF) < 2)
     return("No suitable reference cell type detected.")
   ## calculate reference group proportion
   if (is.null(colnames(count_mat))) 
     colnames(count_mat) <- paste0("cell_type_", seq(ncol(count_mat)))
-  typeSum = colSums(count_mat)
+  typeSum <- colSums(count_mat)
   for (celltype_num in seq(2,nrow(resDF))) {
     if (sum(typeSum[resDF$celltype[1:celltype_num]])/sum(typeSum) > 0.25) {
       message(paste0("Please use at least ", as.character(celltype_num), " cell types as the reference group."))

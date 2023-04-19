@@ -22,9 +22,19 @@ knitr::opts_chunk$set(
 
 # Introduction
 
+Single-cell RNA sequencing (scRNA-seq) has been widely used to deepen our 
+understanding of various biological processes, including cell differentiation, 
+tumor development and disease occurrence. However, it remains challenging to 
+effectively detect differential compositions of cell types when comparing 
+samples coming from different conditions or along with continuous covariates, 
+partly due to the small number of replicates and high uncertainty of cell 
+clustering.
+
 This vignette provides an introduction to the `DCATS` package, which contains 
 methods to detect the differential composition abundances between multiple 
-conditions in singel-cell experiments.
+conditions in singel-cell experiments. It can be easily incooperated with 
+existing single cell data analysis pipeline and contribute to the whole 
+analysis process.
 
 # Installation
 To install `DCATS`, first make sure that you have the devtools package installed:

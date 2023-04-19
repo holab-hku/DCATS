@@ -23,7 +23,7 @@
 #' simMM = create_simMat(5, confuse_rate=0.2)
 #' multinom_EM(X, simMM)
 #' 
-multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
+multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
                         logLik_threshold=1e-2, verbose=TRUE) {
     # Be very careful on the shape of simMM; rowSums(simMM) = 1
     K = ncol(simMM)
@@ -54,11 +54,11 @@ multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000,
         mu = mu / sum(mu)
 
         ## Check convergence
-        logLik_new <- log(mu %*% simMM) %*% X
+        logLik_new = log(mu %*% simMM) %*% X
         if (it > min_iter && logLik_new - logLik_old < logLik_threshold) {
             break
         } else {
-            logLik_old <- logLik_new
+            logLik_old = logLik_new
         }
         if (verbose) {
             message(paste("Iteration", it, "logLik:", round(logLik_new, 3)))

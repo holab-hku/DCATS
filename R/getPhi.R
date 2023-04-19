@@ -25,17 +25,17 @@
 #' phi = DCATS::getPhi(sim_count, sim_design)
 
 
-getPhi = function(count_mat, design_mat){
-  K = ncol(count_mat)
-  S = nrow(count_mat)
-  total= rep(rowSums(count_mat), K)
-  n1 = matrix(count_mat, ncol = 1)
-  design_use = do.call("rbind", replicate(K, design_mat, simplify = FALSE))
-  celltype_idx = matrix(0, S*K, K)
+getPhi <- function(count_mat, design_mat){
+  K <- ncol(count_mat)
+  S <- nrow(count_mat)
+  total <- rep(rowSums(count_mat), K)
+  n1 <- matrix(count_mat, ncol = 1)
+  design_use <- do.call("rbind", replicate(K, design_mat, simplify = FALSE))
+  celltype_idx <- matrix(0, S*K, K)
   for (type in seq(1,K)) {
     celltype_idx[(1:S)+S*(type-1),type] = 1
   }
-  df_use = data.frame(total, n1, design_use, celltype_idx[,-1])
-  fm = aod::betabin(cbind(n1, total-n1) ~ ., ~ 1, data = df_use, warnings = FALSE) # make intercept as 0
+  df_use <- data.frame(total, n1, design_use, celltype_idx[,-1])
+  fm <- aod::betabin(cbind(n1, total-n1) ~ ., ~ 1, data = df_use, warnings = FALSE) # make intercept as 0
   return(fm@random.param)
 }

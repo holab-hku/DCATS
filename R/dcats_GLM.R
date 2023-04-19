@@ -63,7 +63,7 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
     colnames(design_mat) <- paste0("factor_", seq(ncol(design_mat)))
   rownames(LR_vals) <- rownames(LRT_pvals) <- rownames(pvals) <- rownames(LRT_fdr) <- rownames(coeffs) <- rownames(coeffs_err) <- colnames(count_mat)
   colnames(LR_vals) <- colnames(LRT_pvals) <- colnames(pvals) <- colnames(LRT_fdr) <- colnames(coeffs) <- colnames(coeffs_err) <- colnames(design_mat)
-  count_use = count_mat
+  count_use <- count_mat
   if (!is.null(similarity_mat)) {
     for (i in seq_len(nrow(count_mat))) {
       count_use[i, ] <- sum(count_mat[i, ]) * multinom_EM(count_mat[i, 
@@ -79,10 +79,10 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
     }
   }
   else {
-    count_use = count_use + pseudo_count
+    count_use <- count_use + pseudo_count
   }
-  count_use = round(count_use)
-  n_samples = 1
+  count_use <- round(count_use)
+  n_samples <- 1
   for (k in seq_len(ncol(design_mat))) {
     sub_LR_val <- matrix(NA, n_samples, K)
     sub_coeffs_val <- matrix(NA, n_samples, K)
@@ -93,7 +93,7 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
         if (is.null(reference)) {
           df_use <- data.frame(n1 = count_use[, m], total = rowSums(count_use))[idx, 
           ]
-          df_use$ref_count = df_use$total - df_use$n1
+          df_use$ref_count <- df_use$total - df_use$n1
         }
         else {
           if (length(reference) == 1) {df_use <- data.frame(n1 = count_use[, m], ref_count = count_use[, 
@@ -159,7 +159,7 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
         2
       coeffs_err[, k] <- sqrt(sub_coeff_err_pool)
     }
-    LR_median = robustbase::colMedians(sub_LR_val, na.rm = TRUE)
+    LR_median <- robustbase::colMedians(sub_LR_val, na.rm = TRUE)
     LR_vals[, k] <- LR_median
     LRT_pvals[, k] <- pchisq(LR_median, df = 1, lower.tail = FALSE, 
                              log.p = FALSE)
