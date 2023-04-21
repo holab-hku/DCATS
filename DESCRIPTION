@@ -29,6 +29,6 @@ Suggests:
     BiocStyle
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3
-biocViews: SingleCell
+biocViews: SingleCell, Normalization
 Encoding: UTF-8
 Config/testthat/edition: 3
