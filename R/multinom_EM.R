@@ -22,15 +22,14 @@
 #' simMM = create_simMat(5, confuse_rate=0.2)
 #' multinom_EM(X, simMM)
 #' 
-multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
-                        logLik_threshold=1e-2) {
+multinom_EM = function(X, simMM, min_iter=10, max_iter=1000, logLik_threshold=1e-2) {
     # Be very careful on the shape of simMM; rowSums(simMM) = 1
-    K = ncol(simMM)
+    K <- ncol(simMM)
 
     # initialization
-    mu = sample(K)
-    mu = mu / sum(mu)
-    Z = matrix(NA, K, K)
+    mu <- sample(K)
+    mu <- mu / sum(mu)
+    Z <- matrix(NA, K, K)
     logLik_old <- logLik_new <- log(mu %*% simMM) %*% X
 
     for (it in seq_len(max_iter)) {
@@ -38,30 +37,29 @@ multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
 
         for (i in seq(K)) {
             for (j in seq(K)){
-                Z[i, j] = simMM[i, j] * mu[i] / sum(mu * simMM[, j])
+                Z[i, j] <- simMM[i, j] * mu[i] / sum(mu * simMM[, j])
             }
         }
 
         ## M step: maximizing likelihood
 
         ## v2
-        mu = c(Z %*% X)
-        mu = mu / sum(mu)
+        mu <- c(Z %*% X)
+        mu <- mu / sum(mu)
 
         ## Check convergence
-        logLik_new = log(mu %*% simMM) %*% X
+        logLik_new <- log(mu %*% simMM) %*% X
         if (it > min_iter && logLik_new - logLik_old < logLik_threshold) {
             break
         } else {
-            logLik_old = logLik_new
+            logLik_old <- logLik_new
         }
 
     }
 
     ## return values
-    list("mu" = mu, "logLik" = logLik_new,
-         "simMM" = simMM, "X" = X, "X_prop" = X / sum(X),
-         "predict_X_prop" = mu %*% simMM)
+    list("mu" = mu, "logLik" = logLik_new, "simMM" = simMM, "X" = X, 
+         "X_prop" = X / sum(X), "predict_X_prop" = mu %*% simMM)
 }
 
 # matrix(seq(6), 2, 3) * c(1, 2)
