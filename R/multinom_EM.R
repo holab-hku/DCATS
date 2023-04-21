@@ -24,7 +24,7 @@
 #' multinom_EM(X, simMM)
 #' 
 multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
-                        logLik_threshold=1e-2, verbose=TRUE) {
+                        logLik_threshold=1e-2) {
     # Be very careful on the shape of simMM; rowSums(simMM) = 1
     K = ncol(simMM)
 
@@ -33,10 +33,6 @@ multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
     mu = mu / sum(mu)
     Z = matrix(NA, K, K)
     logLik_old <- logLik_new <- log(mu %*% simMM) %*% X
-
-    if (verbose) {
-        message(paste("Iteration 0 logLik:", round(logLik_new, 3)))
-    }
 
     for (it in seq_len(max_iter)) {
         ## E step: expectation of count from each component
@@ -59,9 +55,6 @@ multinom_EM = function(X, simMM, min_iter=10, max_iter=1000,
             break
         } else {
             logLik_old = logLik_new
-        }
-        if (verbose) {
-            message(paste("Iteration", it, "logLik:", round(logLik_new, 3)))
         }
 
     }
