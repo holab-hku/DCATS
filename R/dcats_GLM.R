@@ -67,7 +67,7 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
   if (!is.null(similarity_mat)) {
     for (i in seq_len(nrow(count_mat))) {
       count_use[i, ] <- sum(count_mat[i, ]) * multinom_EM(count_mat[i, 
-      ], similarity_mat, verbose = FALSE)$mu
+      ], similarity_mat)$mu
     }
   }
   K <- ncol(count_mat)

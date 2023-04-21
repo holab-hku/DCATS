@@ -8,7 +8,6 @@
 #' @param min_iter integer(1). number of minimum iterations
 #' @param logLik_threshold A float. The threshold of logLikelihood increase for
 #'   detecting convergence
-#' @param verbose A logic. Whether to print the iteration times and log likelihood.
 #'
 #' @return a list containing \code{mu}, a vector for estimated latent proportion
 #'   of each cluster, \code{logLik}, a float for the estimated log likelihood,

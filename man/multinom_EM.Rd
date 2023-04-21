@@ -4,14 +4,7 @@
 \alias{multinom_EM}
 \title{An EM algorithm to fit a multinomial with maximum likelihood}
 \usage{
-multinom_EM(
-  X,
-  simMM,
-  min_iter = 10,
-  max_iter = 1000,
-  logLik_threshold = 0.01,
-  verbose = TRUE
-)
+multinom_EM(X, simMM, min_iter = 10, max_iter = 1000, logLik_threshold = 0.01)
 }
 \arguments{
 \item{X}{A vector of commopent sizes}
@@ -26,8 +19,6 @@ be assigned to cluster j, hence colSums(simMM) are ones.}
 
 \item{logLik_threshold}{A float. The threshold of logLikelihood increase for
 detecting convergence}
-
-\item{verbose}{A logic. Whether to print the iteration times and log likelihood.}
 }
 \value{
 a list containing \code{mu}, a vector for estimated latent proportion

@@ -195,7 +195,7 @@ Nonetheless, this kind of tasks is challenging and we suggest users perform the 
 ```{r}
 reference_cell = detect_reference(sim_count, sim_design, similarity_mat = simil_mat)
 print(reference_cell)
-dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell[1:2])
+dcats_GLM(sim_count, sim_design, similarity_mat = simil_mat, reference = reference_cell$ordered_celltype[1:2])
 ```
 
 ```{r}
