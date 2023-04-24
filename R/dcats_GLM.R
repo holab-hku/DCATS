@@ -73,8 +73,7 @@ dcats_GLM <- function (count_mat, design_mat, similarity_mat = NULL, pseudo_coun
   K <- ncol(count_mat)
   if (is.null(pseudo_count)) {
     if (any(colMeans(count_mat) == 0)) {
-      warning(paste("Empty cell type exists in at least one conidtion;", 
-                  "adding replicate & condition specific pseudo count:"))
+      warning("Empty cell type exists in at least one conidtion; adding replicate & condition specific pseudo count:")
       count_use <- count_use + 1
     }
   }
