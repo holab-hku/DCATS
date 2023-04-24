@@ -49,7 +49,7 @@ detect_reference <- function(count_mat, design_mat, similarity_mat = NULL, fix_p
   for (celltype_num in seq(2,nrow(resDF))) {
     if (sum(typeSum[resDF$celltype[seq(1,celltype_num)]])/sum(typeSum) > 0.25) {
       message("Please check the 'min_celltypeN' for the number of minimum cell types recommend.")
-      res = list(min_celltypeN = celltype_num, ordered_celltype = resDF$celltype)
+      res <- list(min_celltypeN = celltype_num, ordered_celltype = resDF$celltype)
       return(res)
     }
   }

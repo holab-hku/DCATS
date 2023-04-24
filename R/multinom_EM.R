@@ -22,7 +22,7 @@
 #' simMM = create_simMat(5, confuse_rate=0.2)
 #' multinom_EM(X, simMM)
 #' 
-multinom_EM = function(X, simMM, min_iter=10, max_iter=1000, logLik_threshold=1e-2) {
+multinom_EM <- function(X, simMM, min_iter=10, max_iter=1000, logLik_threshold=1e-2) {
     # Be very careful on the shape of simMM; rowSums(simMM) = 1
     K <- ncol(simMM)
 
