@@ -30,7 +30,7 @@ svm_simMat <- function(dataframe){
   idx5 <- seq(1,row_num)[-c(idx1, idx2, idx3, idx4)]
   idxV <- list(idx1, idx2, idx3, idx4, idx5)
   for (i in seq(1,5)){
-    svmfit <- e1071::svm(clusterRes ~ ., data = dataframe[-idxV[[i]],], kernel = "radial")
+    svmfit <- e1071::svm(as.formula("clusterRes ~ ."), data = dataframe[-idxV[[i]],], kernel = "radial")
     pred[idxV[[i]]] <- as.character(aod::predict(svmfit, subset(dataframe, select = -clusterRes)[idxV[[i]],]))
   }
   conf.mat <- table(dataframe$clusterRes, as.factor(pred))
