@@ -13,14 +13,6 @@ The **latest** version of the `DCATS` package is 0.99.2.
 
 ## Installation
 
-### From Biocounductor
-
-``` r
-if (!requireNamespace("BiocManager"))
-install.packages("BiocManager")
-BiocManager::install("DCTAS")
-```
-
 ### From R
 
 The **latest** `DCATS` package can be conveniently installed using the
@@ -43,6 +35,14 @@ devtools::install_github("holab-hku/DCATS", build_vignettes = TRUE)
 You can also install `DCATS` without building the vignette:
 
     devtools::install_github("holab-hku/DCATS")
+
+### From Biocounductor (required R &gt;= 4.3.0)
+
+``` r
+if (!requireNamespace("BiocManager"))
+install.packages("BiocManager")
+BiocManager::install("DCTAS")
+```
 
 #### For development
 
