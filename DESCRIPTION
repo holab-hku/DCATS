@@ -1,7 +1,7 @@
 Package: DCATS
 Type: Package
 Title: Differential Composition Analysis Transformed by a Similarity matrix
-Version: 0.99.4
+Version: 0.99.5
 Authors@R: 
     person("Xinyi", "Lin", , "linxy29@connect.hku.hk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7780-2461"))
@@ -11,7 +11,7 @@ Description: Methods to detect the differential composition abundances between
     controlling of confounding covariates. To avoid the influence of proportion 
     change from big cell types, DCATS can use either total cell number or 
     specific reference group as normalization term.
-Depends: R (>= 4.3.0), stats
+Depends: R (>= 4.1.0), stats
 License: MIT + file LICENSE
 Imports: 
     MCMCpack, 
