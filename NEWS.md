@@ -15,6 +15,10 @@
 
 + Updated version to trigger a new biuld in Bioconductor
 
-# CHANGES IN VERSION 0.99.6 (2023-05-12)
+# CHANGES IN VERSION 0.99.6 (2023-05-25)
 
 + Updated license information and changed the version of R requirement to R (>= 4.1.0)
+
+# CHANGES IN VERSION 0.99.6 (2023-05-25)
+
++ Added CITATION.cff file

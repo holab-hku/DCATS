@@ -1,0 +1,34 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: DCTAS
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Xinyi
+    family-names: Lin
+    email: linxy29@connect.hku.hk
+    affiliation: The University of Hong Kong
+    orcid: 'https://orcid.org/0000-0002-7780-2461'
+  - given-names: Chuen
+    family-names: Chau
+  - given-names: Kun
+    family-names: Ma
+  - given-names: 'Yuanhua '
+    family-names: Huang
+  - given-names: 'Joshua '
+    family-names: Ho
+    name-particle: 'W.K. '
+repository-code: 'https://github.com/holab-hku/DCATS/tree/master'
+abstract: >-
+  This is a repository for an R package named DCATS that
+  contains methods to detect the differential composition
+  abundances between multiple conditions in singel-cell
+  experiments.
+license: MIT
+commit: 63bc93c
+version: 0.99.6
+date-released: '2023-05-25'
