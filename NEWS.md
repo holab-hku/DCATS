@@ -14,3 +14,7 @@
 # CHANGES IN VERSION 0.99.5 (2023-05-12)
 
 + Updated version to trigger a new biuld in Bioconductor
+
+# CHANGES IN VERSION 0.99.6 (2023-05-12)
+
++ Updated license information and changed the version of R requirement to R (>= 4.1.0)

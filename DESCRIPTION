@@ -14,7 +14,7 @@ Description: Methods to detect the differential composition abundances between
     controlling of confounding covariates. To avoid the influence of proportion 
     change from big cell types, DCATS can use either total cell number or 
     specific reference group as normalization term.
-Depends: R (>= 4.3.0), stats
+Depends: R (>= 4.1.0), stats
 License: MIT + file LICENSE
 Imports: 
     MCMCpack, 
