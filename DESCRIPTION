@@ -4,10 +4,10 @@ Title: Differential Composition Analysis Transformed by a Similarity matrix
 Version: 0.99.6
 Authors@R: c(
     person("Xinyi", "Lin", , "linxy29@connect.hku.hk", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-7780-2461"))
-    person("Chuen", "Chau", email = "hadley@posit.co", role = "cre"),
-    person("Yuanhua", "Huang", email = "jenny@posit.co", role = "cre"),
-    person("Joshua W.K. Ho", role = "cre"))
+           comment = c(ORCID = "0000-0002-7780-2461")),
+    person("Chuen", "Chau", email = "hadley@posit.co", role = "aut"),
+    person("Yuanhua", "Huang", email = "jenny@posit.co", role = "aut"),
+    person("Joshua W.K. Ho", role = "aut"))
 Description: Methods to detect the differential composition abundances between 
     conditions in singel-cell RNA-seq experiments, with or without replicates. 
     It aims to correct bias introduced by missclaisification and enable 
