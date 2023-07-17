@@ -54,8 +54,10 @@ devtools::install_github("holab-hku/DCATS")
 
 ```{r, eval=FALSE}
 if (!requireNamespace("BiocManager"))
-install.packages("BiocManager")
-BiocManager::install("DCTAS")
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
+BiocManager::install("DCATS")
 ```
 
 
