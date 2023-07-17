@@ -41,8 +41,10 @@ You can also install `DCATS` without building the vignette:
 
 ``` r
 if (!requireNamespace("BiocManager"))
-install.packages("BiocManager")
-BiocManager::install("DCTAS")
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
+BiocManager::install("DCATS")
 ```
 
 #### For development
